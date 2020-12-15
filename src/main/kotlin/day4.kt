@@ -2,7 +2,6 @@ package day4
 
 import utils.*
 
-
 val fields = listOf<Pair<String, (String) -> Boolean>>(
     "byr" to { it.toInt() in 1920..2002 },
     "iyr" to { it.toInt() in 2010..2020 },

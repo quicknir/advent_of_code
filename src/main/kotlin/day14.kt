@@ -1,6 +1,6 @@
 package day14
 
-import Utils.*
+import utils.*
 import kotlin.math.pow
 
 sealed class Instruction
@@ -9,8 +9,6 @@ data class Mask(val force_one: ULong, val force_zero: ULong, val xVals: List<ULo
 data class MemoryWrite(val address: ULong, val value: ULong) : Instruction()
 
 fun Mask.mask(int: ULong) = (int or force_one) and force_zero
-
-val MAX = 18446744073709551615UL
 
 fun getInput() = (aocDataDir / "day14.txt").useLines { lines -> lines.map { line ->
     if (line.startsWith("mask")) {
@@ -24,7 +22,7 @@ fun getInput() = (aocDataDir / "day14.txt").useLines { lines -> lines.map { line
         val xIndices = maskString.withIndex().mapNotNull { (index, char) ->
             if (char == 'X') 2.0.pow(index).toULong() else null
         }
-        Mask(onesSum, MAX - zerosSum, xIndices)
+        Mask(onesSum, ULong.MAX_VALUE - zerosSum, xIndices)
     }
     else {
         val (first, second) = line.split(" = ")
@@ -35,7 +33,7 @@ fun getInput() = (aocDataDir / "day14.txt").useLines { lines -> lines.map { line
 
 fun runProgram(applyInstruction: MutableMap<ULong, ULong>.(Mask, MemoryWrite) -> Unit): ULong {
     val input = getInput()
-    var mask = Mask(0UL, MAX, emptyList())
+    var mask = Mask(0UL, ULong.MAX_VALUE, emptyList())
     val memory = mutableMapOf<ULong, ULong>()
     for (instruction in input) {
         when (instruction) {

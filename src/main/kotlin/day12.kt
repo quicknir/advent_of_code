@@ -1,6 +1,6 @@
 package day12
 
-import Utils.*
+import utils.*
 import kotlin.math.absoluteValue
 
 operator fun<R> R.rem(transform: R.() -> R) = this.transform()

@@ -1,6 +1,6 @@
 package day13
 
-import Utils.*
+import utils.*
 import kotlin.math.ceil
 
 fun departureDelay(time: Long, bus: Long) = ceil(time.toDouble() / bus).toLong() * bus - time

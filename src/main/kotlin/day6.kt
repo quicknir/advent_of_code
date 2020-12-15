@@ -1,6 +1,6 @@
 package day6
 
-import Utils.*
+import utils.*
 
 fun getData() = (aocDataDir / "day6.txt").readText()
     .split("\n\n")

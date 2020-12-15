@@ -1,12 +1,7 @@
 package day5
 
-import java.io.File
-import java.lang.RuntimeException
 import kotlin.math.pow
-
-val aocDataDir = File("/home/nir/Downloads")
-
-operator fun File.div(s: String) = this.resolve(s)
+import utils.*
 
 fun String.asBinary(one: Char) = reversed()
     .withIndex()
