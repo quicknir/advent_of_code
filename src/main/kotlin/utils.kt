@@ -52,6 +52,11 @@ fun Sequence<String>.chunkedByEmpty(): Sequence<List<String>> = sequence {
 inline fun <R> File.useChunkedLines(transform: (Sequence<List<String>>) -> R) =
     useLines { transform(it.chunkedByEmpty()) }
 
+data class Point(val i: Int, val j: Int)
+
+operator fun Point.plus(p: Point) = Point(i + p.i, j + p.j)
+operator fun Int.times(p: Point) = Point(this * p.i, this * p.j)
+
 fun main() {
     listOf("hello", "there", "", "bye", "there").asSequence().chunkedByEmpty().toList().also {println(it)}
 }

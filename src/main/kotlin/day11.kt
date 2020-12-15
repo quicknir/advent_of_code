@@ -8,10 +8,6 @@ enum class Seat {
     FLOOR
 }
 
-data class Point(val i: Int, val j: Int)
-
-operator fun Point.plus(p: Point) = Point(i + p.i, j + p.j)
-
 fun directionPoints() = (-1..1).asSequence().map { i ->
     (-1..1).asSequence().map { j -> Point(i, j) }
 }.flatten().filter { it.i != 0 || it.j != 0 }

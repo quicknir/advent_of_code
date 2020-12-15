@@ -5,11 +5,6 @@ import kotlin.math.absoluteValue
 
 operator fun<R> R.rem(transform: R.() -> R) = this.transform()
 
-data class Point(val i: Int, val j: Int)
-
-operator fun Point.plus(p: Point) = Point(i + p.i, j + p.j)
-operator fun Int.times(p: Point) = Point(this * p.i, this * p.j)
-
 sealed class Action {
     object F : Action()
 }
