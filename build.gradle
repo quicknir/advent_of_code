@@ -14,3 +14,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-test-common"
     implementation "org.jetbrains.kotlin:kotlin-test-annotations-common"
 }
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=kotlin.ExperimentalUnsignedTypes"
+    }
+}
