@@ -10,7 +10,7 @@ fun part1(): Long {
     val departureTime = lines[0].toLong()
     return lines[1].split(",").asSequence()
         .mapNotNull { str -> str.toLongOrNull()?.let { it to departureDelay(departureTime, it)} }
-        .minBy { it.second }!!
+        .minByOrNull { it.second }!!
         .let { it.first * it.second }
 }
 

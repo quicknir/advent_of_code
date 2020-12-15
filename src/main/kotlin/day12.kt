@@ -3,8 +3,6 @@ package day12
 import utils.*
 import kotlin.math.absoluteValue
 
-operator fun<R> R.rem(transform: R.() -> R) = this.transform()
-
 sealed class Action {
     object F : Action()
 }
@@ -72,14 +70,6 @@ fun runData(startDir: Point, evolver: State.(Instruction) -> State): Int {
 fun part1() = runData(Direction.E.vector, State::evolve1)
 fun part2() = runData(Point(10, 1), State::evolve2)
 
-fun bar1(f: Int.() -> Unit) {}
-fun bar2(f: (Int) -> Unit) {}
-
-fun f(x: Int): Unit {}
-
 fun main() {
     println(part2())
-    val x = { i: Int -> Unit }
-    val y: Int.() -> Unit = { }
-    bar1(::f)
 }

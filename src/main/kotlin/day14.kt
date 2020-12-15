@@ -5,10 +5,8 @@ import kotlin.math.pow
 
 sealed class Instruction
 
-data class Mask(val force_one: ULong, val force_zero: ULong, val xVals: List<ULong>) : Instruction()
+data class Mask(val forceOne: ULong, val forceZero: ULong, val xVals: List<ULong>) : Instruction()
 data class MemoryWrite(val address: ULong, val value: ULong) : Instruction()
-
-fun Mask.mask(int: ULong) = (int or force_one) and force_zero
 
 fun getInput() = (aocDataDir / "day14.txt").useLines { lines -> lines.map { line ->
     if (line.startsWith("mask")) {
@@ -44,11 +42,12 @@ fun runProgram(applyInstruction: MutableMap<ULong, ULong>.(Mask, MemoryWrite) ->
     return memory.values.sum()
 }
 
+fun Mask.mask(ulong: ULong) = (ulong or forceOne) and forceZero
+
 fun part1() = runProgram { mask, instruction -> set(instruction.address, mask.mask(instruction.value))}
 
-fun Mask.maskV2(int: ULong): List<ULong> {
-    val start = int or force_one
-    val outputs = mutableListOf(start)
+fun Mask.maskV2(ulong: ULong): List<ULong> {
+    val outputs = mutableListOf(ulong or forceOne)
     for (xVal in xVals) {
         for (i in outputs.indices) {
             outputs += outputs[i] xor xVal
@@ -62,6 +61,6 @@ fun part2() = runProgram { mask, instruction ->
 }
 
 fun main() {
-    println(part2())
+    println(part1())
 }
 

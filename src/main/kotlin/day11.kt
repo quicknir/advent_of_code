@@ -18,12 +18,6 @@ fun SeatMap.getSeat(p: Point) = getOrNull(p.i)?.getOrNull(p.j)
 
 operator fun SeatMap.contains(p: Point) = p.i in indices && p.j in first().indices
 
-fun SeatMap.withPoints() = withIndex().asSequence().map { (i, row) ->
-    withIndex().asSequence().map { (j, seat) ->
-        Point(i, j) to seat
-    }
-}.flatten()
-
 fun getData() = (aocDataDir / "day11.txt").readLines().map { line ->
     line.map {
         when (it) {

@@ -16,7 +16,7 @@ fun getInput() = (aocDataDir / "day5.txt").useLines { lines ->
     }.toList()
 }
 
-fun part1() = getInput().max().also { println(it) }
+fun part1() = getInput().maxOrNull()!!.also { println(it) }
 
 fun part2(): Int {
     val ids = getInput().toSet()

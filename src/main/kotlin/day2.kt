@@ -19,15 +19,12 @@ fun RuledPassword.isValidTwo(): Boolean{
 
 fun countValid(validator: RuledPassword.() -> Boolean) = (aocDataDir / "day2.txt").useLines { lines ->
     lines.count { it.toRuledPassword().validator() }
-    lines.map {
-
-    }
 }
 
-fun part1() = println(countValid(RuledPassword::isValidOne))
-fun part2() = println(countValid(RuledPassword::isValidTwo))
+fun part1() = countValid(RuledPassword::isValidOne)
+fun part2() = countValid(RuledPassword::isValidTwo)
 
 fun main() {
-    part2()
+    println(part1())
 }
 
