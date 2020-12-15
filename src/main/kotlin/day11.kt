@@ -1,7 +1,6 @@
 package day11
 
 import utils.*
-import java.lang.Exception
 
 enum class Seat {
     EMPTY,
