@@ -4,6 +4,8 @@ import utils.*
 
 data class Restriction(val name: String, val first: IntRange, val second: IntRange)
 
+fun Restriction.isValid(int: Int) = int in first || int in second
+
 data class InputData(
     val restrictions: List<Restriction>,
     val myTicket: List<Int>,
@@ -32,7 +34,7 @@ fun getInput(): InputData {
 fun part1(): Int {
     val input = getInput()
     return input.nearbyTickets.asSequence().flatten().filter { ticketValue ->
-        !input.restrictions.any { ticketValue in it.first || ticketValue in it.second }
+        !input.restrictions.any { it.isValid(ticketValue) }
     }.sum()
 }
 
@@ -40,7 +42,7 @@ fun part2(): Long {
     val input = getInput()
     val validTickets = (input.nearbyTickets.asSequence().filter { ticket ->
         ticket.all { ticketValue ->
-            input.restrictions.any { ticketValue in it.first || ticketValue in it.second }
+            input.restrictions.any { it.isValid(ticketValue) }
         }
     } + sequenceOf(input.myTicket)).toList()
 
@@ -50,8 +52,7 @@ fun part2(): Long {
     for (ticket in validTickets) {
         for ((ticketIndex, ticketValue) in ticket.withIndex()) {
             for (restrictionIndex in possibilities[ticketIndex].toList()) {
-                val restriction = input.restrictions[restrictionIndex]
-                if (ticketValue !in restriction.first && ticketValue !in restriction.second) {
+                if (!input.restrictions[restrictionIndex].isValid(ticketValue)) {
                     possibilities[ticketIndex].remove(restrictionIndex)
                 }
             }
