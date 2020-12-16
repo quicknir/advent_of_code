@@ -1,5 +1,7 @@
 package day15
 
+import utils.*
+
 val input = listOf(8,0,17,4,1,12)
 
 fun run(lastTurn: Int): Int {
@@ -9,7 +11,7 @@ fun run(lastTurn: Int): Int {
     var lastNumber = input.last()
 
     for (turn in (input.size) until lastTurn) {
-        val curNumber = turn - (state.put(lastNumber, turn) ?: turn)
+        val curNumber = turn - state.putAndDefault(lastNumber, turn)
         lastNumber = curNumber
     }
 

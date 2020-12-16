@@ -8,9 +8,9 @@ operator fun<R> R.rem(transform: R.() -> R) = this.transform()
 
 operator fun File.div(s: String) = resolve(s)
 
-fun <K, V> MutableMap<K, V>.update(k: K, transform: (V?) -> V) {
-    this[k] = transform(this[k])
-}
+fun <K, V> MutableMap<K, V>.update(k: K, transform: (V?) -> V) = set(k, transform(get(k)))
+
+fun <K, V> MutableMap<K, V>.putAndDefault(key: K, value: V) = put(key, value) ?: value
 
 fun String.popSuffix(suffix: String) = if (endsWith(suffix)) removeSuffix(suffix) else null
 
