@@ -33,6 +33,8 @@ fun Sequence<String>.chunkedByEmpty(): Sequence<List<String>> = sequence {
 inline fun <R> File.useChunkedLines(transform: (Sequence<List<String>>) -> R) =
     useLines { transform(it.chunkedByEmpty()) }
 
+inline fun File.readChunkedLines() = useLines { it.asSequence().chunkedByEmpty().toList() }
+
 data class Point(val i: Int, val j: Int)
 
 operator fun Point.plus(p: Point) = Point(i + p.i, j + p.j)
