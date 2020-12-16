@@ -42,10 +42,10 @@ fun part2(): Long {
         ticket.all { ticketValue ->
             input.restrictions.any { ticketValue in it.first || ticketValue in it.second }
         }
-    }.toList() + sequenceOf(input.myTicket)).toList()
+    } + sequenceOf(input.myTicket)).toList()
 
     val numFields = input.myTicket.size
-    val possibilities = (1..numFields).map { (0 until numFields).toMutableSet() }
+    val possibilities = List(numFields) { (0 until numFields).toMutableSet() }
 
     for (ticket in validTickets) {
         for ((ticketIndex, ticketValue) in ticket.withIndex()) {
